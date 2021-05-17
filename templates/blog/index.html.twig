@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row"><div class="col"><h1>Bienvenue sur le blog</h1></div></div>
+    <div class="row">
+        {# ici on veut afficher tous les articles du blog #}
+        {% for article in articles %}
+        <div class="col-12 col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2>{{ article.title }}</h2>
+                    <small>{{ article.createdAt|date('d/m/Y') }}</small>
+                </div>
+                <div class="card-body">
+                    {{ article.content|u.truncate(100, '...') }}
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('blog_show', {id: article.id}) }}" class="btn btn-link">Lire la suite</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
